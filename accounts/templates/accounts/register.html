@@ -1,0 +1,49 @@
+{% extends "base.html" %} 
+
+{% load static %}
+
+{% block title %}Registration{% endblock title %}
+
+{% block content %}
+<h1>Registration</h1>
+
+<p>Already have an account? Then please <a href="{{ login_url }}">login in</a></p>
+
+{% comment %} <form class="register" id="registration_form" method="post" action="{% url 'register' %}">
+
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <button type="submit">Register&raquo;</button>
+</form> {% endcomment %}
+ <div class="wrapper">
+      <form method="post">
+        {% csrf_token %}
+        <span>Register</span>
+        <label for="username">
+          Username
+        </label>
+        {{ form.username }}
+        <label for="email">
+          Email
+        </label>
+        {{ form.email }}
+        <label for="password1">
+          Password
+        </label>
+        {{ form.password1 }}
+        <label for="password2">
+          Repeat password
+        </label>
+        {{ form.password2 }}
+        <input class="submit" type="submit" value="Register" />
+      </form>
+      {% for message in messages %}
+      <p class="alert alert-danger">{{ message }}</p>
+      {% endfor %}
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% load static %} {% block content %}
+
+<h1>Login</h1>
+
+<form method="post">
+  {% csrf_token %}
+  <span>/Log In</span>
+  <label for="username"> Username </label>
+  <input type="text" name="username" id="username" required />
+  <label for="password"> Password </label>
+  <input type="password" name="password" id="password" required />
+  <input class="submit" type="submit" value="Log In" />
+</form>
+{% comment %}
+<form action="login" method="post">
+  {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+  <input type="text" name="username" placeholder="Userame" /><br />
+  <input type="text" name="password" placeholder="Password" /><br />
+  {% endif %}
+  <input type="text" name="username" placeholder="Userame" /><br />
+  <input type="text" name="password" placeholder="Password" /><br />
+  <input type="submit" name="login" />
+</form>
+{% endcomment %} {% endblock content %}

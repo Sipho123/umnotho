@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}
+My profile
+{% endblock title %}
+<!-- MODAL -->
+{% block content %}
+<div class="ui modal mymodal">
+  <i class="close icon"></i>
+  <div class="header">
+    Update you Profile 
+  </div>
+  <div class="image content">
+    <div class="ui medium image">
+      <img src="{{profile.avatar.url}}">
+    </div>
+    <div class="description">
+      <div class="ui header">Provide new information here.</div>
+      <form action="" method="POST" class="ui form" enctype='multipart/form-data'>
+        {% csrf_token %}
+        {{form.as_p}}
+    </div>
+  </div>
+  <div class="actions">
+      <button class="ui positive right labeled icon button">
+        Update
+      <i class="checkmark icon"></i>
+    </button>
+    </form>
+  </div>
+</div>
+<div class="ui segment">
+  {% if confirm %}
+    <div class="ui green message">Your profile has been updated</div>
+  {% endif %}
+  <h3>My profile: {{request.user}}</h3>
+  <div class="ui grid">
+    <div class="row">
+      <div class="six wide column">
+          <img class="ui medium rounded image" src={{profile.avatar.url}}>
+          <div class="row mt-5">
+            <button class='ui secondary button button' id='model-btn'>Update your profile</button>
+          </div>
+      </div>
+    </div>
+    <div class="ten wide column">
+       <table class="ui table">
+          <tbody>
+            <tr>
+              <td>Business name</td>
+              <td>{{profile.user}}</td>
+            </tr>
+            <tr>
+                <td>Headline</td>
+                <td>{{profile.business_sales_line}}</td>
+              </tr>
+              <tr>
+                <td>Bio</td>
+                <td>{{profile.bio}}</td>
+              </tr>
+              <tr>
+                <td>Number of connections</td>
+                <td>{{profile.get_connections_no}}</td>
+              </tr>
+              <tr>
+                <td>Number of connections</td>
+                <td>
+                  <ul>
+                    {% for connections in profile.get_connections %}
+                      <li>{{connections}}</li>
+                    {% endfor %}
+                  </ul>
+                </td>
+              </tr> 
+              <tr>
+                <td>Number of posts</td>
+                <td>{{profile.get_posts_no}}</td>
+              </tr>
+              <tr>
+                <td>Number of likes given</td>
+                <td>{{profile.get_likes_given_no}}</td>
+              </tr>
+              <tr>
+                <td>Number of likes recieved</td>
+                <td>{{profile.get_likes_recieved_no}}</td>
+              </tr>
+              
+          </tbody>
+        </table>
+      </div>  
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
